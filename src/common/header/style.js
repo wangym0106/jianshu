@@ -47,7 +47,6 @@ export const SearchInfo = styled.div`
    left:0;
    top : 56px;
    width: 240px;
-   height:100px;
    padding: 0 20px;
    box-shadow: 0 0 8px rgba(0 , 0 , 0, .2);
 `;
@@ -65,18 +64,18 @@ export const SearchInfoSwitch = styled.span`
 `;
 
 export const SearchInfoList = styled.div`
-    overflow:hidden;
+   overflow:hidden;
 `;
 export const SearchInfoItem = styled.a`
+    display: block;
     line-height:20px;
     padding: 0 5px;
-    font-size:12px;
     margin-right:10px;
     margin-buttom:15px;
+    font-size:12px;
     border: 1px solid #ddd;
     color : #787878;
     border-radius:3px;
-    display: block;
     float:left;
 `;
 export const NavSearchWrapper = styled.div`
@@ -90,7 +89,6 @@ export const NavSearchWrapper = styled.div`
         line-height:30px;
         border-radius :15px;
         text-align:center;
-        // background:green;
         &.focused{
             color:#fff;
             background:#777;
@@ -99,7 +97,7 @@ export const NavSearchWrapper = styled.div`
    
 `;
 export const NavSearch = styled.input.attrs({
-    placeholder:'搜索'
+    placeholder: '搜索'
 })`
     width:160px;
     height:38px;

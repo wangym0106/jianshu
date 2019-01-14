@@ -9,9 +9,10 @@ export const  sertchForcus =()=>({
 export const  sertchBlur =()=>({ 
     type : constans.SEARCH_BLUR
 });
-export const  changeList =(data)=>({ 
+const  changeList =(data)=>({ 
     type : constans.CHANGE_LIST,
-    data : fromJS(data)   
+    data : fromJS(data)   ,
+    totalPage : Math.ceil(data.length/ 10)
 });
 
 export const getList = () =>{

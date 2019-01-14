@@ -19,7 +19,9 @@ import {
 }
     from './style';
 class Header extends Component {
+
     render() {
+        const {focused, handleInputFocused, handleInputBlur} = this.props;
         return (
             <HeaderWrapper>
                 <Logo />
@@ -31,18 +33,18 @@ class Header extends Component {
                         Aa</NavItem>
                     <NavSearchWrapper>
                         <CSSTransition
-                            in={this.props.focused}
+                            in={focused}
                             timeout={600}
                             classNames='slide'
                         >
                             <NavSearch
-                                className={this.props.focused ? 'focused' : ''}
-                                onFocus={this.props.handleInputFocused}
-                                onBlur={this.props.handleInputBlur}
+                                className={focused ? 'focused' : ''}
+                                onFocus={handleInputFocused}
+                                onBlur={handleInputBlur}
                             >
                             </NavSearch>
                         </CSSTransition>
-                        <i className={this.props.focused ? 'focused iconfont' : 'iconfont'}>&#xe612;</i>
+                        <i className={focused ? 'focused iconfont' : 'iconfont'}>&#xe612;</i>
                         {this.getAreaList()}
                     </NavSearchWrapper>
                 </Nav>
@@ -56,7 +58,15 @@ class Header extends Component {
         )
     }
     getAreaList() {
-        if (this.props.focused) {
+        const {focused , list ,page} = this.props;
+        const newList = list.toJS();
+        const pageList = [];
+         for(let i = (page - 1) * 10 ; i < page * 10 ; i ++ ) {
+            pageList.push(
+                <SearchInfoItem key = {newList[i]}>{newList[i]}</SearchInfoItem>
+            );
+        }
+        if (focused) {
             return (
                 <SearchInfo>
                     <SearchInfoTitle>
@@ -64,13 +74,8 @@ class Header extends Component {
                                     <SearchInfoSwitch>换一批</SearchInfoSwitch>
                     </SearchInfoTitle>
                     <SearchInfoList>
-                      
                         {
-                            this.props.list.map((item ) => {
-                                return(
-                                    <SearchInfoItem key = {item}> {item}</SearchInfoItem>
-                                )
-                            })
+                            pageList
                         }
                     </SearchInfoList>
                 </SearchInfo>
@@ -88,7 +93,10 @@ const mapStateToProps = (state) => {
     return {
         // focused: state.get('header').get('focused')
         focused: state.getIn(['header', 'focused']),
-        list: state.getIn(['header', 'list'])
+        list: state.getIn(['header', 'list']),
+        page: state.getIn(['header','page']),
+        totalPage: state.getIn(['header','totalPage'])
+
     }
 }
 
