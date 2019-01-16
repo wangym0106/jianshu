@@ -71,6 +71,7 @@ export const SearchInfoItem = styled.a`
     line-height:20px;
     padding: 0 5px;
     margin-right:10px;
+    margin-top: 10px;
     margin-buttom:15px;
     font-size:12px;
     border: 1px solid #ddd;

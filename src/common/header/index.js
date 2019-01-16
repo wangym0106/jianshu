@@ -30,6 +30,7 @@ class Header extends Component {
                     <NavItem className='left' >下载App</NavItem>
                     <NavItem className='right' >登录</NavItem>
                     <NavItem className='right' >
+                        <span class = 'iconfont'>&#xe636;</span>
                         Aa</NavItem>
                     <NavSearchWrapper>
                         <CSSTransition
@@ -50,7 +51,7 @@ class Header extends Component {
                 </Nav>
                 <Addition>
                     <Button className='writing'>
-                        <span className='iconfont'></span>
+                        <span class='iconfont'>&#xe616;</span>
                         写文章</Button>
                     <Button className='reg'>注册</Button>
                 </Addition>
@@ -58,20 +59,25 @@ class Header extends Component {
         )
     }
     getAreaList() {
-        const {focused , list ,page} = this.props;
+        const {focused, list, page, mouseIn, totalPage , mouseEnter, mouseLeave, handleChangePage} = this.props;
         const newList = list.toJS();
         const pageList = [];
-         for(let i = (page - 1) * 10 ; i < page * 10 ; i ++ ) {
-            pageList.push(
-                <SearchInfoItem key = {newList[i]}>{newList[i]}</SearchInfoItem>
-            );
+        if (newList.length > 0) {
+            for(let i = (page - 1) * 10 ; i < page * 10 ; i ++ ) {
+                pageList.push(
+                    <SearchInfoItem key = { newList[i] }>{newList[i]}</SearchInfoItem>
+                );
+            }
         }
-        if (focused) {
+        if (focused || mouseIn) {
             return (
-                <SearchInfo>
+                <SearchInfo 
+                    onMouseEnter = {mouseEnter}
+                    onMouseLeave = {mouseLeave}
+                >
                     <SearchInfoTitle>
                         热门搜索
-                                    <SearchInfoSwitch>换一批</SearchInfoSwitch>
+                                    <SearchInfoSwitch onClick = {()=>handleChangePage(page, totalPage)}>换一批</SearchInfoSwitch>
                     </SearchInfoTitle>
                     <SearchInfoList>
                         {
@@ -95,8 +101,8 @@ const mapStateToProps = (state) => {
         focused: state.getIn(['header', 'focused']),
         list: state.getIn(['header', 'list']),
         page: state.getIn(['header','page']),
+        mouseIn : state.getIn(['header','mouseIn']),
         totalPage: state.getIn(['header','totalPage'])
-
     }
 }
 
@@ -107,8 +113,20 @@ const mapDispatchToProps = (dispatch) => {
             dispatch(actionCreators.sertchForcus());
         },
         handleInputBlur() {
-            const action = actionCreators.sertchBlur();
-            dispatch(action);
+            dispatch(actionCreators.sertchBlur());
+        },
+        mouseEnter() {
+            dispatch(actionCreators.mouseEnter());
+        },
+        mouseLeave(){
+            dispatch(actionCreators.mouseLeave())
+        },
+        handleChangePage(page, totalPage){
+            if (page < totalPage) {
+                dispatch(actionCreators.handleChangePage(page + 1))
+            }else {
+                dispatch(actionCreators.handleChangePage(1))
+            }
         }
     }
 }
