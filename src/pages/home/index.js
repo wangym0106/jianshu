@@ -5,7 +5,7 @@ import List from './component/List';
 import Recommend from './component/Recommend';
 import Writer from './component/Writer';
 import {connect} from 'react-redux';
-import axios from 'axios';
+import { actionCreators} from './store/index';
 class Home extends Component {
     render(){
         return(
@@ -23,22 +23,14 @@ class Home extends Component {
         )
     }
     componentDidMount(){
-        axios.get('/api/home.json').then(res => {
-            const data = res.data.data;
-            const action = {
-                type : "change_home_data",
-                topicList:data.topicList,
-                articalList:data.articalList,
-                recommendList:data.recommendList
-            }
-            this.props.changeHomeData(action);
-        });
+        this.props.changeHomeData();
     }
+   
 }
 const mapDipatch = (dispatch) =>{
     return {
-        changeHomeData(action) {
-              dispatch(action)
+        changeHomeData() {
+              dispatch(actionCreators.changeHomeData());
         }
     }
 }
