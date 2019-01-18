@@ -1,19 +1,18 @@
 import { fromJS } from 'immutable';
 const defaultState =fromJS( {
-   topicList:[{
-       id:1,
-       name:'社会热点',
-       imageUrl:'https://upload.jianshu.io/admin_banners/web_images/4602/249f8f28449b109dfd49c10347d654abada7fbfe.jpeg?imageMogr2/auto-orient/strip|imageView2/1/w/1250/h/540'
-   },
-   {
-    id:2,
-    name:'手绘',
-    imageUrl:'https://upload.jianshu.io/admin_banners/web_images/4602/249f8f28449b109dfd49c10347d654abada7fbfe.jpeg?imageMogr2/auto-orient/strip|imageView2/1/w/1250/h/540'
-}
-]
+    topicList:[],
+    articalList:[],
+    recommendList :[]           
+
 });
 export default (state = defaultState , action  ) => {
     switch(action.type) {
+        case 'change_home_data':
+            return state.merge({
+                'topicList': fromJS(action.topicList),
+                'articalList': fromJS(action.articalList),
+                'recommendList' : fromJS(action.recommendList)               
+            })
         default:
              return state;
     }
