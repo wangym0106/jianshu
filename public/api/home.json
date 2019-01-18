@@ -12,7 +12,7 @@
          "imageUrl":"https://upload.jianshu.io/admin_banners/web_images/4602/249f8f28449b109dfd49c10347d654abada7fbfe.jpeg?imageMogr2/auto-orient/strip|imageView2/1/w/1250/h/540"
          }]
          ,
-         "articalList":[{
+         "articleList":[{
              "id":1,
             "title": "一款不错的个人私有云：NextCloud安装教程",
              "desc":"说明：现时越来越多云盘都接踵宣告关闭，差不多都去用百度云盘了，而咱们手上有些譬如蜜斯姐影片之类传上去就会被调和，因而咱们有必要伏笔VPS搭建个私...",
